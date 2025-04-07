@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to staging...'
-                bat 'xcopy /E /Y target\* C:\\deployments\\staging'
+                bat "xcopy /E /Y target\* C:\\deployments\\staging"
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying to production...'
-                bat 'xcopy /E /Y target\* C:\\deployments\\production'
+                bat "xcopy /E /Y target\* C:\\deployments\\production"
             }
         }
     }
