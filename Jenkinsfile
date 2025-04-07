@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Heena-lab/SE-Devops-Assignment.git'
+                git 'https://github.com/your-username/jenkins-cicd-java-demo.git'
             }
         }
 
