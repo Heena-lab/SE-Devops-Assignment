@@ -1,0 +1,47 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Build') {
+            agent { label 'windows-slave' }
+            steps {
+                echo "Building the project..."
+                bat 'echo Simulating build step'
+            }
+        }
+        stage('Test') {
+            agent { label 'windows-slave' }
+            steps {
+                echo "Running tests..."
+                bat 'echo Simulating tests'
+            }
+        }
+        stage('Deploy to Staging') {
+            when {
+                branch 'develop'
+            }
+            agent { label 'windows-slave' }
+            steps {
+                echo "Deploying to Staging..."
+                bat 'echo Simulating Staging Deployment'
+            }
+        }
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            agent { label 'windows-slave' }
+            steps {
+                echo "Deploying to Production..."
+                bat 'echo Simulating Production Deployment'
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Pipeline failed! Sending alert..."
+            // Optional: send email or Slack notification
+        }
+    }
+}
