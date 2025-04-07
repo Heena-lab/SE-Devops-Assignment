@@ -21,25 +21,23 @@ pipeline {
                 bat 'mvn test'
             }
         }
-
         stage('Deploy to Staging') {
         steps {
         echo 'Deploying to staging...'
-        bat "xcopy /E /Y target\\* C:\\\\deployments\\\\staging"
+        bat """xcopy /E /Y target\\* C:\\deployments\\staging"""
        }
-   }
+    }
 
-   stage('Deploy to Production') {
+    stage('Deploy to Production') {
     input {
         message 'Approve deployment to production?'
-    }
-    steps {
+       }
+       steps {
         echo 'Deploying to production...'
-        bat "xcopy /E /Y target\\* C:\\\\deployments\\\\production"
-     }
-  }
-
-    }
+        bat """xcopy /E /Y target\\* C:\\deployments\\production"""
+       }
+   }
+}
 
     post {
         failure {
