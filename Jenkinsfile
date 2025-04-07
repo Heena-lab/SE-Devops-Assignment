@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/jenkins-cicd-java-demo.git'
+                git 'https://github.com/Heena-lab/SE-Devops-Assignment.git'
             }
         }
 
@@ -21,24 +21,23 @@ pipeline {
                 bat 'mvn test'
             }
         }
-
         stage('Deploy to Staging') {
-            steps {
-                echo 'Deploying to staging...'
-                bat 'xcopy /E /Y target\* C:\\deployments\\staging'
-            }
-        }
-
-        stage('Deploy to Production') {
-            input {
-                message 'Approve deployment to production?'
-            }
-            steps {
-                echo 'Deploying to production...'
-                bat 'xcopy /E /Y target\* C:\\deployments\\production'
-            }
-        }
+        steps {
+        echo 'Deploying to staging...'
+        bat """xcopy /E /Y target\\* C:\\deployments\\staging"""
+       }
     }
+
+    stage('Deploy to Production') {
+    input {
+        message 'Approve deployment to production?'
+       }
+       steps {
+        echo 'Deploying to production...'
+        bat """xcopy /E /Y target\\* C:\\deployments\\production"""
+       }
+   }
+}
 
     post {
         failure {
