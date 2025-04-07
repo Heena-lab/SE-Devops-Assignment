@@ -11,14 +11,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                bat 'javac HelloWorld.java'
+                bat 'javac Adder.java'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Testing...'
-                bat 'java HelloWorld'
+                bat 'java AdderTest'
             }
         }
 
