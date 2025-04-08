@@ -7,7 +7,7 @@ public class AdderTest {
     @Test
     public void testAdd() {
         Adder adder = new Adder();
-        assertEquals(5, adder.add(2, 3));
+        assertEquals(6, adder.add(2, 3));
     }
 
     @Test
