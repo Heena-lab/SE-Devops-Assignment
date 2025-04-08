@@ -1,0 +1,88 @@
+Started by user Heena Mulla
+Obtained Jenkinsfile from git https://github.com/Heena-lab/SE-Devops-Assignment.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Slave-node in /home/jenkins-slave/workspace/CI-CD-Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/Heena-lab/SE-Devops-Assignment.git
+ > git.exe init C:\home\jenkins-slave\workspace\CI-CD-Pipeline # timeout=10
+Fetching upstream changes from https://github.com/Heena-lab/SE-Devops-Assignment.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.48.1.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/Heena-lab/SE-Devops-Assignment.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe config remote.origin.url https://github.com/Heena-lab/SE-Devops-Assignment.git # timeout=10
+ > git.exe config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 7eed2954fae76e7cbf10d86e14789733f31e870f (origin/main)
+Commit message: "Merge pull request #3 from Heena-lab/feature-change1"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+ > git.exe rev-parse "origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 7eed2954fae76e7cbf10d86e14789733f31e870f # timeout=10
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\home\jenkins-slave\workspace\CI-CD-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Heena-lab/SE-Devops-Assignment.git # timeout=10
+Fetching upstream changes from https://github.com/Heena-lab/SE-Devops-Assignment.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.48.1.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/Heena-lab/SE-Devops-Assignment.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job.
+ERROR: Maximum checkout retry attempts reached, aborting
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+Stage "Build" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+Stage "Test" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Staging)
+Stage "Deploy to Staging" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Production)
+Stage "Deploy to Production" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+ > git.exe rev-parse "origin/master^{commit}" # timeout=10
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Build failed!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job.
+Finished: FAILURE
