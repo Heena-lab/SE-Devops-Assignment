@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        STAGING_DIR = 'C:\\deployments\\staging'
+        PROD_DIR = 'C:\\deployments\\production'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,42 +15,40 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building...'
-                bat 'javac Adder.java'
+                bat 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing...'
-                bat 'java AdderTest'
+                bat 'mvn test'
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying to staging...'
-                bat """xcopy /E /Y target\\* C:\\deployments\\staging"""
+                bat "mkdir \"${env.STAGING_DIR}\""
+                bat "xcopy /E /Y target\\* \"${env.STAGING_DIR}\""
             }
         }
 
         stage('Deploy to Production') {
-            input {
-                message 'Approve deployment to production?'
+            when {
+                branch 'main'
             }
             steps {
-                echo 'Deploying to production...'
-                bat """xcopy /E /Y target\\* C:\\deployments\\production"""
+                bat "mkdir \"${env.PROD_DIR}\""
+                bat "xcopy /E /Y target\\* \"${env.PROD_DIR}\""
             }
         }
     }
 
     post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
         failure {
             echo 'Build failed!'
-        }
-        success {
-            echo 'Build succeeded!'
         }
     }
 }
