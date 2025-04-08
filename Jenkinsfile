@@ -27,7 +27,7 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                bat "mkdir \"${env.STAGING_DIR}\""
+                bat "if not exist \"${env.STAGING_DIR}\" mkdir \"${env.STAGING_DIR}\""
                 bat "xcopy /E /Y target\\* \"${env.STAGING_DIR}\""
             }
         }
